@@ -1,23 +1,19 @@
-cp metric-prusa/bar-clamp.stl  metric-prusa-lm8uu/bar-clamp.stl 
-cp metric-prusa/bearing-guide.stl metric-prusa-lm8uu/bearing-guide.stl 
-cp metric-prusa/belt-clamp-nut-holder.stl metric-prusa-lm8uu/belt-clamp-nut-holder.stl 
-cp metric-prusa/belt-clamp.stl  metric-prusa-lm8uu/belt-clamp.stl 
-cp metric-prusa/coupling.stl metric-prusa-lm8uu/coupling.stl 
-cp metric-prusa/endstop-holder.stl metric-prusa-lm8uu/endstop-holder.stl 
-cp metric-prusa/frame-vertex.stl metric-prusa-lm8uu/frame-vertex.stl 
-cp metric-prusa/frame-vertex-foot.stl metric-prusa-lm8uu/frame-vertex-foot.stl 
-cp metric-prusa/printable-bushing.stl metric-prusa-lm8uu/printable-bushing.stl 
-cp metric-prusa/printable-bushing-lm8uu.stl metric-prusa-lm8uu/printable-bushing-lm8uu.stl
-cp metric-prusa/pulley.stl metric-prusa-lm8uu/pulley.stl 
-cp metric-prusa/rod-clamp.stl metric-prusa-lm8uu/rod-clamp.stl 
-cp metric-prusa/sanguinololu-holder.stl metric-prusa-lm8uu/sanguinololu-holder.stl 
-cp metric-prusa/wade.stl metric-prusa-lm8uu/wade.stl 
-cp metric-prusa/wade-big.stl metric-prusa-lm8uu/wade-big.stl
-cp metric-prusa/wade-small.stl metric-prusa-lm8uu/wade-small.stl
-cp metric-prusa/ybrac-t.stl metric-prusa-lm8uu/ybrac-t.stl 
-cp metric-prusa/z-motor-mount.stl metric-prusa-lm8uu/z-motor-mount.stl 
-
+openscad -s metric-prusa-lm8uu/bar-clamp.stl source/bar-clamp.scad
+openscad -s metric-prusa-lm8uu/belt-clamp_GT2.stl source/belt-clamp_GT2.scad
+openscad -s metric-prusa-lm8uu/coupling.stl source/coupling.scad
+openscad -s metric-prusa-lm8uu/makerbot-endstop-mount.stl source/makerbot-endstop-mount.scad
+openscad -s metric-prusa-lm8uu/frame-vertex-neo-top.stl -D 'basefoot=false;' source/frame-vertex-neo.scad
+openscad -s metric-prusa-lm8uu/frame-vertex-neo-foot.stl -D 'basefoot=true;' source/frame-vertex-neo.scad
+openscad -s metric-prusa-lm8uu/pulley-GT2-20T.stl -D 'teeth=20;profile=12;motor_shaft=5.2;retainer=1;' source/Pulley_T-MXL-XL-HTD-GT2_N-tooth.scad
+openscad -s metric-prusa-lm8uu/gregs-herringbone-small.stl -D 'small=true;' source/Wades_Gears_helix.scad
+openscad -s metric-prusa-lm8uu/gregs-herringbone-big.stl -D 'small=false;' source/Wades_Gears_helix.scad
+openscad -s metric-prusa-lm8uu/gregs-jhead_mount -D 'hotend_mount=jhead_mount;' source/jonaskuehling_gregs-wade-v3.scad
+openscad -s metric-prusa-lm8uu/ybrac-t.stl source/ybrac-t.scad
+openscad -s metric-prusa-lm8uu/z-motor-mount.stl source/integrated-z-motor-mount.scad
 openscad -s metric-prusa-lm8uu/x-end-idler.stl -D 'linear=true;lme8uu=false' source/x-end-idler.scad
 openscad -s metric-prusa-lm8uu/x-end-motor.stl -D 'linear=true;lme8uu=false' source/x-end-motor.scad
-openscad -s metric-prusa-lm8uu/x-carriage.stl -D 'linear=true;lme8uu=false' source/x-carriage.scad
+openscad -s metric-prusa-lm8uu/x-carriage-doublefan.stl source/llluis-gregs-new-x-carriage-double.scad
 openscad -s metric-prusa-lm8uu/y-bushing.stl -D 'linear=true;lme8uu=false' source/y-bushing.scad
+openscad -s metric-prusa-lm8uu/lower-z-mount.stl source/parametric_lower_z_mount.scad
+
+#TODO: fan duct, arduino mount, power supply mount, power outlet mount, z rod stabilizer, mod for z motor mount middle openning

@@ -66,18 +66,11 @@ module positioned_motor_mount()
 			
 			translate(-motor_mount_translation)
 			{
-				difference(){				
-					translate(top_corner+[-bridge_length,-nema17_support_d-bridge_shear*bridge_length,-2.5])
-						multmatrix([[1,0,0],[bridge_shear,1,0],[0,0,1]])
-							cube([bridge_length,nema17_support_d,6]);
-					// quick hack
-					if(linear==true){
-						translate(top_corner+[-bridge_length,-nema17_support_d-bridge_shear*bridge_length+8.5,-2.5])
-							multmatrix([[1,0,0],[bridge_shear+0.16,1,0],[0,0,1]])
-								#cube([bridge_length,nema17_support_d,6]);
-					}
-				}
-
+				translate(top_corner+
+				[-bridge_length,-nema17_support_d-bridge_shear*bridge_length,-2.5])
+				multmatrix([[1,0,0],[bridge_shear,1,0],[0,0,1]])
+				cube([bridge_length,nema17_support_d,6]);
+				
 				render()
 				translate(top_corner+[-thickness,-nema17_support_d,-nema17_support_d/2])
 				intersection()
@@ -136,7 +129,7 @@ module motor_mount ()
 		translate(-nema17_hole_spacing*[1,1,0]/2)
 		barbell (nema17_support_d/2,
 		nema17_support_d/2,20,60,nema17_hole_spacing);
-		% cube([nema17_width,nema17_width,0.1],true);
+		//cube([nema17_width,nema17_width,0.1],true);
 	}
 }
 
@@ -147,18 +140,19 @@ module motor_mount_holes ()
 	rotate(motor_mount_rotation)
 	{
 		for (hole=[3:5])
-		rotate([0,0,90*hole])
-		translate(nema17_hole_spacing*[1,1,0]/2)
-		rotate(360/16)
-		cylinder(h=thickness+2,r=4.4/2,$fn=8);
+			rotate([0,0,90*hole])
+				translate(nema17_hole_spacing*[1,1,0]/2)
+					rotate(360/16)
+						cylinder(h=thickness+2,r=4.4/2,$fn=8);
 		
 		for (hole=[3:5])
 		rotate([0,0,90*hole])
-		translate(nema17_hole_spacing*[1,1,0]/2)
-		translate([0,0,-24])
-		cylinder(h=25,r=7/2);
+			translate(nema17_hole_spacing*[1,1,0]/2)
+				translate([0,0,-24])
+					cylinder(h=25,r=7/2);
 	}
-translate([2.5,-25,0]) #cube([10,20,10]);
+	
+	translate([2.5,-25,0]) cube([10,20,10]);
 }
 
 module barbell (r1,r2,r3,r4,separation) 
@@ -167,7 +161,7 @@ module barbell (r1,r2,r3,r4,separation)
 	x2=[separation,0];
 	x3=triangulate (x1,x2,r1+r3,r2+r3);
 	x4=triangulate (x2,x1,r2+r4,r1+r4);
-	# render()
+	render()
 	difference ()
 	{
 		union()
