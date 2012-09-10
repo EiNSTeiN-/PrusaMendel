@@ -13,3 +13,7 @@ translate([-15,45,0]) {
 }
 
 translate([60,-8,0]) import("gregs-herringbone-big.stl");
+
+
+translate([50,-80,0]) import("z-rod-stab.stl");
+translate([-83,20,0]) rotate([0,0,90]) import("z-rod-stab.stl");
