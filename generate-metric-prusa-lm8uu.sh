@@ -16,5 +16,7 @@ openscad -s metric-prusa-lm8uu/x-carriage-doublefan.stl source/llluis-gregs-new-
 openscad -s metric-prusa-lm8uu/y-bushing.stl -D 'linear=true;lme8uu=false' source/y-bushing.scad
 openscad -s metric-prusa-lm8uu/lower-z-mount.stl source/parametric_lower_z_mount.scad
 openscad -s metric-prusa-lm8uu/z-rod-stab.stl source/jme-z-rod-stab.scad
+openscad -s metric-prusa-lm8uu/arduino-mount.stl source/arduino-brackets.scad
+openscad -s metric-prusa-lm8uu/power-supply-mount.stl source/power-supply-mount.scad
 
-#TODO: fan duct, arduino mount, power supply mount, power outlet mount, mod for z motor mount middle openning
+#TODO: fan duct, power outlet mount, mod for z motor mount middle openning
