@@ -30,6 +30,7 @@ module WadeL_double_helix(){
 	height=11;
 	pressure_angle=30;
 
+	translate([0,0,height/2])
 	difference(){
 		union(){
 		gear (number_of_teeth=teeth,
@@ -106,7 +107,8 @@ module WadesS_double_helix(){
 	twist=200;
 	height=25;
 	pressure_angle=30;
-
+	
+	translate([0,0,-(height/2*1.2)])
 	difference(){
 		union(){
 		gear (number_of_teeth=teeth,
