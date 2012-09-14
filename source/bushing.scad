@@ -201,13 +201,14 @@ module lm8uu_bearing_cut()
 	}
 
 
+z_linear_bearings();
 module z_linear_bearings(){
 
 	translate(v=[0,9.5,0]) rotate(a=[0,0,90]){
 		difference(){
-			linear_holder_base(65);
+			linear_holder_base(65-9);
 			translate(v=[0,0,14.5+2]) ziptie();
-			translate(v=[0,0,block_height-(12+2)-5]) ziptie();
+			translate(v=[0,0,block_height-(12+2)-5-5]) ziptie();
 		}
 
 		//x-end adapter
@@ -217,8 +218,8 @@ module z_linear_bearings(){
 		}
 		translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,0+1]) cube(size = [10-5.5,20,2], center = true);
 		translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,lm8uu_length+4.0]) cube(size = [10-5.5,20,2], center = true);
-		translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,64-lm8uu_length-3]) cube(size = [10-5.5,20,2], center = true);
-		translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,64]) cube(size = [10-5.5,20,2], center = true);
+		*translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,64-lm8uu_length-3-9]) cube(size = [10-5.5,20,2], center = true);
+		translate(v=[-(10-5.5)/2-lm8uu_radius+2,0,64-9]) cube(size = [10-5.5,20,2], center = true);
 	}
 }
 
