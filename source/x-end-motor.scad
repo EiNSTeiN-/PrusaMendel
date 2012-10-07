@@ -69,7 +69,7 @@ module positioned_motor_mount()
 				translate(top_corner+
 				[-bridge_length,-nema17_support_d-bridge_shear*bridge_length,-2.5])
 				multmatrix([[1,0,0],[bridge_shear,1,0],[0,0,1]])
-				cube([bridge_length,nema17_support_d,6]);
+				#cube([bridge_length,nema17_support_d,6]);
 				
 				render()
 				translate(top_corner+[-thickness,-nema17_support_d,-nema17_support_d/2])

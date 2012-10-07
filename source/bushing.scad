@@ -125,6 +125,7 @@ module cut_corners(lf,lb,rf,rb){
 //lm8uu_bearing_holder();
 }
 
+linear_holder_base(65);
 module linear_holder_base(length){
 	
 difference(){
@@ -135,7 +136,7 @@ translate(v=[-5,0,length/2]) cube(size = [10,20,length], center = true);
 
 //holder for main block in x-end
 // leaving it out now
-//translate(v=[0,0,0]) cylinder(h = length, r=10, $fn=60);
+translate(v=[0,0,0]) cylinder(h = length, r=10, $fn=60);
 
 //translate(v=[-5,0,15.8/2]) cube(size = [12,23,15.8], center = true);
 //translate(v=[0,0,0]) cylinder(h = block_height, r=lm8uu_radius+2.5, $fn=60);
@@ -144,9 +145,9 @@ translate(v=[-5,0,length/2]) cube(size = [10,20,length], center = true);
 translate(v=[0,0,-2]) cylinder(h = length+4, r=(lm8uu_diameter+0.8)/2, $fn=50);
 // not needed for zip tie
 //main cut
-//translate(v=[10,0,length/2]) cube(size = [20,14,length+4], center = true);
+translate(v=[10,0,length/2]) cube(size = [20,14,length+4], center = true);
 //smooth entry cut
-//translate(v=[12,0,length/2]) rotate(a=[0,0,45]) cube(size = [20,20,length+4], center = true);
+translate(v=[12,0,length/2]) rotate(a=[0,0,45]) cube(size = [20,20,length+4], center = true);
 }
 }
 
@@ -201,7 +202,7 @@ module lm8uu_bearing_cut()
 	}
 
 
-z_linear_bearings();
+//z_linear_bearings();
 module z_linear_bearings(){
 
 	translate(v=[0,9.5,0]) rotate(a=[0,0,90]){
