@@ -10,6 +10,8 @@
 // dxf tooth data from http://oem.cadregister.com/asp/PPOW_Entry.asp?company=915217&elementID=07807803/METRIC/URETH/WV0025/F
 // pulley diameter checked and modelled from data at http://www.sdp-si.com/D265/HTML/D265T016.html
 
+include <inc/functions.scad>
+
 /**
  * @name Pulley
  * @category Printed
@@ -176,7 +178,7 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 		}
 	   
 		//hole for motor shaft
-		translate([0,0,-1])cylinder(r=motor_shaft/2,h=pulley_b_ht + pulley_t_ht + retainer_ht + 2,$fn=motor_shaft*4);
+		translate([0,0,-1]) polyhole(d=motor_shaft, h=pulley_b_ht + pulley_t_ht + retainer_ht + 2);
 				
 		//captive nut and grub screw holes
 	
@@ -189,20 +191,20 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 			union()
 			{
 				//entrance
-				translate([0,-pulley_b_ht/4-0.5,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) cube([m3_nut_flats,pulley_b_ht/2+1,m3_nut_depth],center=true);
+				translate([0,-pulley_b_ht/4-0.5,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) cube([m3_nut_flats,pulley_b_ht/2+1,m3_nut_depth+0.5],center=true);
 	
 				//nut
 				if ( m3_nut_hex > 0 )
 					{
 						// hex nut
-						translate([0,0.25,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) rotate([0,0,30]) cylinder(r=m3_nut_points/2,h=m3_nut_depth,center=true,$fn=6);
+						translate([0,0.25,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) rotate([0,0,30]) cylinder(r=m3_nut_points/2,h=m3_nut_depth+0.5,center=true,$fn=6);
 					} else {
 						// square nut
 						translate([0,0.25,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) cube([m3_nut_flats,m3_nut_flats,m3_nut_depth],center=true);
 					}
 	
 				//grub screw hole
-				rotate([0,0,22.5])cylinder(r=m3_dia/2,h=pulley_b_dia/2+1,$fn=8);
+				rotate([0,0,22.5]) polyhole(d=m3_dia,h=pulley_b_dia/2+1);
 			}
 		}}
 	 }

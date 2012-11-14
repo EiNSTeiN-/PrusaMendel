@@ -8,12 +8,12 @@
 // http://github.com/prusajr/PrusaMendel
 
 
-module nut(d,h,horizontal=true){
-    cornerdiameter =  (d / 2) / cos (180 / 6);
-    cylinder(h = h, r = cornerdiameter, $fn = 6);
-    if(horizontal){
-        for(i = [1:6]){
-            rotate([0,0,60*i]) translate([-cornerdiameter-0.2,0,0]) rotate([0,0,-45]) cube([2,2,h]);
+module nut(d,h, horizontal=true, center=false) {
+    cornerdiameter = (d / 2) / cos (180 / 6);
+    cylinder(h = h, r = cornerdiameter, center=center, $fn = 6);
+    if(horizontal) {
+        for(i = [1:6]) {
+            rotate([0,0,60*i]) translate([-cornerdiameter-0.2,0,center ? h/2 : 0]) rotate([0,0,-45]) cube([2,2,h]);
         }
     }
 }
@@ -22,7 +22,7 @@ module nut(d,h,horizontal=true){
 module polyhole(d, h, center=false) {
     n = max(round(2 * d),3);
     rotate([0,0,180])
-        cylinder(h = h, r = (d / 2) / cos (180 / n), $fn = n);
+        cylinder(h = h, r = (d / 2) / cos (180 / n), center=center, $fn = n);
 }
 
 // make it interchangeable between this and cylinder

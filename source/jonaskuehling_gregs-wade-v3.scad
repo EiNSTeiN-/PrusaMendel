@@ -5,6 +5,7 @@
 // http://www.thingiverse.com/thing:6713
 
 include<configuration.scad>
+include<inc/functions.scad>
 include<jonaskuehling-default.scad>
 
 // Define the hotend_mounting style you want by specifying hotend_mount=style1+style2 etc.
@@ -171,7 +172,7 @@ hole_for_608=22.6;
 block_top_right=[wade_block_width,wade_block_height];
 
 layer_thickness=0.25;
-filament_feed_hole_d=3.5;
+filament_feed_hole_d=3.6;
 filament_diameter=3;
 filament_feed_hole_offset=filament_diameter+1.5;
 idler_nut_trap_depth=7.3;
@@ -245,7 +246,6 @@ module wade (hotend_mount=0,legacy_mount=false){
 			cylinder(r=base_thickness/2,h=wade_block_depth,$fn=20);
 
 			//Provide the bevel betweeen the base and the wade block.
-			render()
 			difference(){
 				translate([-block_bevel_r,0,0])
 				cube([block_bevel_r*2+wade_block_width,
@@ -340,12 +340,11 @@ module wade (hotend_mount=0,legacy_mount=false){
 
 function in_mask(mask,value)=(mask%(value*2))>(value-1); 
 
-//block_holes();
 
 module block_holes(legacy_mount=false){
 	//Round off the top of the block. 
 	translate([0,wade_block_height-block_bevel_r,-1])
-	render()
+	
 	difference(){
 		translate([-1,0,0])
 		cube([block_bevel_r+1,block_bevel_r+1,wade_block_depth+2]);
@@ -355,7 +354,7 @@ module block_holes(legacy_mount=false){
 
 	// Round the top front corner.
 	translate ([-base_leadout-base_thickness/2,-1,wade_block_depth-block_bevel_r])
-	render()
+	
 	difference(){
 		translate([-1,0,0])
 		cube([block_bevel_r+1,base_thickness+2,block_bevel_r+1]);
@@ -367,7 +366,6 @@ module block_holes(legacy_mount=false){
 	// Round the top back corner.
 	translate ([base_length-base_leadout+base_thickness/2-block_bevel_r,
 		-1,wade_block_depth-block_bevel_r])
-	render()
 	difference(){
 		translate([0,0,0])
 		cube([block_bevel_r+1,base_thickness+2,block_bevel_r+1]);
@@ -378,7 +376,7 @@ module block_holes(legacy_mount=false){
 
 	// Round the bottom front corner.
 	translate ([-base_leadout-base_thickness/2,-1,-2])
-	render()
+	
 	difference(){
 		translate([-1,0,-1])
 		cube([block_bevel_r+1,base_thickness+2,block_bevel_r+1]);
@@ -389,13 +387,12 @@ module block_holes(legacy_mount=false){
 
 	// Idler fulcrum hole.
 	translate(idler_fulcrum+[0,0,0.4])
-	cylinder(r=m3_diameter/2,h=idler_short_side-2*idler_hinge_width-0.5,center=true,$fn=16);
+		polyhole(d=m3_diameter,h=idler_short_side-2*idler_hinge_width-0.5,center=true);
 
 	translate(idler_fulcrum+[0,0,idler_short_side/2-idler_hinge_width-1])
-	cylinder(r=m3_nut_diameter/2+0.25,h=1,$fn=40);
+		cylinder(r=m3_nut_diameter/2+0.25,h=1,$fn=40);
 
 	//Rounded cutout for idler hinge.
-	render()
 	translate(idler_fulcrum)
 	difference(){
 		cylinder(r=idler_hinge_r+0.5,h=idler_short_side+0.5,center=true,$fn=60);
@@ -403,10 +400,7 @@ module block_holes(legacy_mount=false){
 	}
 
 	translate(motor_mount_translation){
-		translate([-gear_separation,0,0]){
-			rotate([0,180,0])
-			translate([0,0,1])
-			import_stl("wade-large.stl");
+		translate([-gear_separation,0,0]) {
 
 			// Open the top to remove overhangs and to provide access to the hobbing.
 			translate([-wade_block_width+2,0,9.5])
@@ -436,22 +430,11 @@ module block_holes(legacy_mount=false){
 			cylinder(r=16/2,h=wade_block_depth-(8+layer_thickness)+2);	
 
 			// Filament feed.
-			translate([-filament_feed_hole_offset,0,wade_block_depth/2])
+			#translate([-filament_feed_hole_offset,0,wade_block_depth/2])
 			rotate([90,0,0])
 			rotate(360/16)
 			cylinder(r=filament_feed_hole_d/2,h=wade_block_depth*3,center=true,$fn=8);	
 
-			//Widened opening for hobbed bolt access.
-			// EDIT jonaskuehling: removed for better stability around tilt screw nut traps
-/*			translate([2,wade_block_height/2+2,wade_block_depth/2+0.2])
-			rotate([90,0,0])
-			rotate(-45)
-			union(){
-				cylinder(r=5,h=wade_block_height,center=true,$fn=30);	
-				translate([-5,0,0])
-				cube([10,10,wade_block_height],center=true);
-			}
-*/
 			// Mounting holes on the base.
 			translate(legacy_mount?[-3.4,0,-1]:[0,0,0])
 			for (mount=[0:1]){
@@ -459,7 +442,7 @@ module block_holes(legacy_mount=false){
 					-motor_mount_translation[1]-1,wade_block_depth/2])
 				rotate([-90,0,0])
 				rotate(360/16)
-				cylinder(r=m4_diameter/2,h=base_thickness+2,$fn=8);	
+					polyhole(d=m4_diameter,h=base_thickness+2);
 	
 				translate([-filament_feed_hole_offset+25*((mount<1)?1:-1),
 					-motor_mount_translation[1]+base_thickness/2,
@@ -470,8 +453,6 @@ module block_holes(legacy_mount=false){
 			}
 
 		}
-%		translate([0,0,-8])
-		import_stl("wade-small.stl");
 	}
 
 	// Idler mounting holes and nut traps.
@@ -631,7 +612,7 @@ module wadeidler(){
 		//Fulcrum hole. Gelenkloch
 		translate(idler_fulcrum)
 		rotate(360/12)
-		cylinder(h=idler_short_side+2,r=m3_diameter/2-0.1,center=true,$fn=8);
+		polyhole(h=idler_short_side+2,d=m3_diameter,center=true);
 
 		//Nut trap for fulcrum screw. Loch fuer Mutter
 		translate(idler_fulcrum+[0,0,idler_short_side/2-idler_hinge_width-1+1.5])
@@ -656,7 +637,7 @@ module wadeidler(){
 			}
 
 			// Rounded corners.
-			render()
+			
 			translate([idler_height/2,idler_long_top,
 				idler_screw_hole*(idler_short_side/2)])
 			difference(){
@@ -678,7 +659,7 @@ module b608(h=8){
 module barbell (x1,x2,r1,r2,r3,r4) {
 	x3=triangulate (x1,x2,r1+r3,r2+r3);
 	x4=triangulate (x2,x1,r2+r4,r1+r4);
-	render()
+	
 	difference (){
 		union(){
 			translate(x1)
@@ -827,7 +808,7 @@ module wildseyed_mount_holes(insulator_d=12.7){
 	for (hole=[-1,1])
 	rotate(90,[1,0,0])
 	translate([hole*(extruder_recess_d/2-1.5),3+1.5,-wade_block_depth/2-1])
-	cylinder(r=1.5,h=wade_block_depth+2,$fn=10);
+	polyhole(d=m3_diameter,h=wade_block_depth+2, center=false);
 }
 
 //PEEK mount holes for reprap-fab.org 10mm dia insulator

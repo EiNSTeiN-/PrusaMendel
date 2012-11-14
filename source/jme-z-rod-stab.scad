@@ -5,6 +5,7 @@
 // Derived from: http://www.thingiverse.com/thing:9864
 
 include <configuration.scad> // From PrusaMendel/source/
+include <inc/functions.scad>
 
 outer_diameter = m8_diameter/2+3.3;
 opening_size = m8_diameter-1.5;
@@ -50,8 +51,8 @@ module nut_trap_outside() {
 
 module nut_trap_inside() {
   union () {
-    translate([0, 0, 2]) cylinder(h =5, r = m3_nut_diameter_horizontal/2, $fn = 6);
-    translate([0, 0, -1]) cylinder(h = 5, r = m3_diameter/2, $fn = 10);
+    translate([0, 0, 2]) nut(h=5, d=m3_nut_diameter_horizontal);
+    translate([0, 0, -1]) polyhole(h = 5, d = m3_diameter);
   }
 }
 
@@ -68,7 +69,8 @@ module origclamp() {
         translate([17,12.5,7.5]) rotate([-90,0,0]) nut_trap_inside();
         translate([outer_diameter, outer_diameter-(opening_size/2), 0]) cube([18,opening_size,20]);
         translate([outer_diameter, outer_diameter, 0]) cylinder(h =20, r = m8_diameter/2, $fn = 18);
-        translate([17, 17, 7.5]) rotate([90, 0, 0]) cylinder(h =20, r = m3_diameter/2, $fn = 10);
+        translate([17, 17, 7.5]) rotate([90, 0, 0])
+            polyhole(h =20, d = m3_diameter);
       }
     }
   }
