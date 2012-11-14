@@ -43,7 +43,13 @@ shaft_dia = 7.0;
 module coupling(c){
     union(){
         difference(){
-            cube(size = [30,25,8], center = true);
+			difference() {
+            		cube(size = [30,25,8], center = true);
+				#translate([7, c==1 ? 11 : -13,-1]) rotate([-45,0,90]) difference() {
+					cube([2,4,4]);
+					rotate([-45,0,0]) cube([2,8,8]);
+				}
+			}
 
             if(c==1){
                 //slot
