@@ -106,7 +106,7 @@ block_height = 2*lm8uu_length+17;
 
 module cut_corners(lf,lb,rf,rb) {
 	difference() {
-		lm8uu_bearing_holder();
+		lm8uu_bearing_holder(limits=true);
 		if(lf) translate(v=[(10)-3,(-28.5/2)+3,0]) rotate(a=[0,0,45]) 
 			rotate(a=[35,0,0]) translate(v=[0,-5,0]) cube(size = [20,10,20], center = true);
 		if(lb) translate(v=[(-10)+3,(-28.5/2)+3,0]) rotate(a=[0,0,-45]) 
@@ -144,29 +144,30 @@ module linear_holder_base(length, width=10) {
 }
 
 
-module y_linear_bearings(){
-	difference() {
-		union() {
+module y_linear_bearings() {
+	translate([0,3,7]) rotate([90,0,0]) difference() {
+		#union() {
+			translate(v=[0,-4,1.5]) cube(size = [26+12,6,3], center = true);
 			translate(v=[0,0,1.5]) cube(size = [26,14,3], center = true);
 			translate(v=[-13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6);
 			translate(v=[13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6); 
 		}
 
-		translate(v=[-14,0,0])polyhole(m3_diameter, 10);
-		translate(v=[14,0,0])polyhole(m3_diameter, 10);
+		translate(v=[-14,0,0]) polyhole(m3_diameter, 10);
+		translate(v=[14,0,0]) polyhole(m3_diameter, 10);
 		//hack
 		translate(v=[0,14.25,4.5]) rotate(a=[90,0,0]) translate(v=[0,9.5,0]) rotate(a=[0,0,90]) {
 			translate(v=[0,0,lm8uu_length/2+0.5]) ziptie();
 		}
 	}
 
-	cut_corners(true, true, true, true);
+	translate([0,0,14.25]) rotate([-90,0,0]) cut_corners(true, true, false, false);
 }
 
 lm8uu_holder_length = lm8uu_length+4.5;
 lm8uu_holder_width= lm8uu_diameter+5;
 
-module lm8uu_bearing_holder() {
+module lm8uu_bearing_holder(limits=true) {
 	translate(v=[0,14.25,4.5]) rotate(a=[90,0,0]) translate(v=[0,9.5,0]) rotate(a=[0,0,90]) {
 
 		difference() {
@@ -178,8 +179,10 @@ module lm8uu_bearing_holder() {
 			translate(v=[0,0,12.5]) ziptie();
 		}
 
-		translate(v=[-(10-5.5)/2-5.5,0,0.75]) cube(size = [10-5.5,20,1.5], center = true);
-		translate(v=[-(10-5.5)/2-5.5,0,lm8uu_length+3.75]) cube(size = [10-5.5,20,1.5], center = true);
+		if(limits) {
+			#translate(v=[-(10-5.5)/2-5.5,0,0.75]) cube(size = [10-5.5,20,1.5], center = true);
+			translate(v=[-(10-5.5)/2-5.5,0,lm8uu_length+3.75]) cube(size = [10-5.5,20,1.5], center = true);
+		}
 	}
 }
 

@@ -13,7 +13,8 @@ use <inc/parametric_involute_gear_v5.0.scad>
 //WadesL(); //this module call will make the large gear
 //WadesS();  //this module call will make the small gear
 
-Wades(true);
+small = true;
+Wades(small);
 
 module Wades(small=true) {
 
