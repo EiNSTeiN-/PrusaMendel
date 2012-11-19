@@ -39,13 +39,6 @@ module teardropcentering2 (r=4.5,h=20)
 	}
 }
 
-
-module polyhole(d,h) {
-    n = max(round(2 * d),3);
-    rotate([0,0,180])
-        cylinder(h = h, r = (d / 2) / cos (180 / n), $fn = n, center=true);
-}
-
 module roundcorner(diameter,edge_length){
 	rotate([0,0,180])
 	translate([0,0,-(edge_length/2+1)])

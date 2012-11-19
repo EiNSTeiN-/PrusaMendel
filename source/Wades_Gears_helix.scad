@@ -6,17 +6,22 @@
 // http://www.thingiverse.com/thing:4305
 
 use <inc/mendel_misc.inc>
+use <configuration.scad>
+use <inc/functions.scad>
 use <inc/parametric_involute_gear_v5.0.scad>
 
 //WadesL(); //this module call will make the large gear
 //WadesS();  //this module call will make the small gear
 
-small=false;
+Wades(true);
 
-if(small) {
-	rotate([180,0,0]) WadesS_double_helix();
-} else {
-	WadeL_double_helix();
+module Wades(small=true) {
+
+	if(small) {
+		rotate([180,0,0]) WadesS_double_helix();
+	} else {
+		WadeL_double_helix();
+	}
 }
 
 module WadeL_double_helix(){
@@ -137,7 +142,7 @@ module WadesS_double_helix(){
 			circles=circles,
 			twist=twist/teeth);
 		}
-		translate([0,-5,12])cube([5.5,2.3,9],center = true);
-		translate([0,0,11])rotate([0,90,-90])cylinder(r=1.7,h=20);
+		translate([0,-5,12]) cube([5.5,2.5,9],center = true);
+		translate([0,0,11])rotate([0,90,-90]) polyhole(d=3,h=20);
 	}
 }

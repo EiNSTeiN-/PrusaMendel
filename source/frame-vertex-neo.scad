@@ -10,20 +10,15 @@
 // aka Tonokps parametric frame vertex
 // Thank you guys for your great work
 
-//include <configuration.scad>
+include <configuration.scad>
 
-m8_diameter = 8.6;
 basefoot=true;
 
 vfvertex_height=m8_diameter+5;
 
-
 vertex(with_foot=basefoot);
 
-// %translate([43.9, 25.3, 25 + vfvertex_height]) rotate([0, -90, 30]) import_stl("../metric-prusa/z-motor-mount-neo-x2.stl");
-
 module teardrop (r=8, h=20) {
-	render()
 	rotate([-270, 0, 90]) {
 		cylinder(r=r, h=h, $fn=64);
 		translate([-(r * sqrt(2)) / 2, 0, 0]) cube([r * sqrt(2), r * sqrt(2) / 2, h]);
@@ -33,8 +28,6 @@ module teardrop (r=8, h=20) {
 		}
 	}
 }
-
-
 
 /**
  * @id frame-vertex

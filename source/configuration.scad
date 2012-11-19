@@ -45,7 +45,7 @@ lme8uu = false;
 // m4_diameter = 0;
 // m4_nut_diameter = 0;
 
-// m3_diameter = 0;
+m3_diameter = 3; // polyholes need the exact measurement
 // m3_nut_diameter = 0;
 
 // Bushing holder
