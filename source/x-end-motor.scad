@@ -26,7 +26,8 @@ corection = 1.17;
 
 use <x-end.scad>
 
-difference (){
+module xendmotor() {
+	difference (){
 		union ()
 		{
 			mirror() xend(true,linear);
@@ -37,10 +38,13 @@ difference (){
 			translate(v = [0, 0, 0]) positioned_motor_mount();
 		}
 		positioned_motor_mount_holes();
+	}
+	translate([-5,-30,2])scale([2,1,2]) rotate(a=[90,0,0]) linear_extrude(file = "this-way-up.dxf", layer = "l",
+ 		 height = 2, center = true, convexity = 10, twist = -fanrot);
 }
-translate([-5,-30,2])scale([2,1,2]) rotate(a=[90,0,0]) linear_extrude(file = "this-way-up.dxf", layer = "l",
-  height = 2, center = true, convexity = 10, twist = -fanrot);
 
+
+xendmotor();
 
 // GregFrosts stuff
 nema17_hole_spacing=1.2*25.4; 

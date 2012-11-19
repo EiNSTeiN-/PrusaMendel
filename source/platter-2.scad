@@ -1,29 +1,43 @@
 
+use <z-motor-mount-barclamp.scad>;
+use <ybrac-t.scad>;
+use <x-end-idler.scad>;
+use <x-end-motor.scad>;
+use <Wades_Gears_helix.scad>;
+use <jme-z-rod-stab.scad>;
+use <arduino-brackets.scad>;
+use <power-supply-mount.scad>;
+
 %cube([200,200,1],center=true);
 
+translate([72,-60,0]) rotate([0,0,180]) translate(v=[0,0,8]) rotate ([0,0,0]) zmotormount();
+translate([-72,-57,0]) rotate([0,0,0]) translate(v=[0,0,8]) rotate ([0,0,0]) zmotormount();
 
-translate([60,58,0]) rotate([0,0,90]) import("../metric-prusa-lm8uu/z-motor-mount-barclamp.stl");
-translate([-60,-72,0]) rotate([0,0,90]) import("../metric-prusa-lm8uu/z-motor-mount-barclamp.stl");
+translate([0,-35,0]) rotate([0,0,-90]) mirror() ybract();
 
-translate([10,-60,0]) rotate([0,0,-90]) import("../metric-prusa-lm8uu/ybrac-t.stl");
-
-translate([-15,45,0]) {
-	translate([-4,3,0]) rotate([0,0,180]) import("../metric-prusa-lm8uu/x-end-idler.stl");
-	translate([-4,-40,0]) rotate([0,0,180]) import("../metric-prusa-lm8uu/x-end-motor.stl");
+translate([-17,60,0]) {
+	translate([-4,6,0]) rotate([0,0,180]) xendidler(linear=true);
+	translate([-4,-40,0]) rotate([0,0,180]) xendmotor(linear=true);
 }
 
-translate([60,-8,0]) import("../metric-prusa-lm8uu/gregs-herringbone-big.stl");
+translate([55,18,0]) Wades_double_helix(small=false);
 
-translate([50,-80,0]) import("../metric-prusa-lm8uu/z-rod-stab.stl");
-translate([-81,20,0]) rotate([0,0,90]) import("../metric-prusa-lm8uu/z-rod-stab.stl");
+translate([-20,-82,0]) rotate([0,0,180]) z_rod_stab();
+translate([-84,30,0]) rotate([0,0,90]) z_rod_stab();
 
+translate([20,-55,0]) mirror([1,0,0]) endstop();
+translate([-75,60,0]) rotate([0,0,-90]) endstop();
+translate([-57,74,0]) rotate([0,0,90]) endstop();
+translate([-77,74,0]) rotate([0,0,90]) endstop();
 
-*translate([83,-43,0]) rotate([0,0,-90]) mirror([0,1,0]) import("../metric-prusa-lm8uu/power-supply-mount.stl");
-*translate([-83,50,0]) rotate([0,0,-90]) import("../metric-prusa-lm8uu/power-supply-mount.stl");
-*translate([-73,75,0]) rotate([0,0,90]) mirror([0,0,0]) import("../metric-prusa-lm8uu/power-supply-mount.stl");
-*translate([75,-83.5,0]) import("../metric-prusa-lm8uu/power-supply-mount.stl");
+translate([62,60,0]) {
+powersupply_mount();
+translate([-17,23,0]) rotate([0,0,180]) powersupply_mount();
+}
 
-
-*translate([-3,-25,0]) rotate([0,0,-60]) import("../metric-prusa-lm8uu/arduino-mount.stl");
-*translate([-28,-12,0]) rotate([0,0,-135]) import("../metric-prusa-lm8uu/arduino-mount.stl");
-*translate([-10,95,0]) rotate([0,0,180]) rotate([0,0,-180]) mirror([0,1,0]) import("../metric-prusa-lm8uu/arduino-mount.stl");
+/*
+translate([20,-55,0]) mirror([1,0,0]) import("../metric-prusa-lm8uu/arduino-mount.stl");
+translate([-72,55,0]) rotate([0,0,-90]) import("../metric-prusa-lm8uu/arduino-mount.stl");
+translate([-55,68,0]) rotate([0,0,90]) import("../metric-prusa-lm8uu/arduino-mount.stl");
+translate([-75,68,0]) rotate([0,0,90]) import("../metric-prusa-lm8uu/arduino-mount.stl");
+*/

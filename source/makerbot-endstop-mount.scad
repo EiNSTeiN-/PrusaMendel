@@ -4,6 +4,8 @@
 
 $fn=24;
 
+endstop();
+
 module tear(r, h) {
   union() {
     cylinder(r=r, h=h);
@@ -11,6 +13,7 @@ module tear(r, h) {
   }
 }
 
+module endstop() {
 difference() {
   union() {
 		translate([1,.5,0])
@@ -45,4 +48,5 @@ difference() {
 
   translate([3.9, -5, -1])
   cylinder(r=1.5, h=6);
+}
 }

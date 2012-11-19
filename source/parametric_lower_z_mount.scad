@@ -8,6 +8,7 @@
 // USAGE EXAMPLE
 ///////////////////////////////
 mount();
+//translate([32,-10,0,]) rotate([0,0,180]) mount();
 ///////////////////////////////
 // USER PARAMETERS
 ///////////////////////////////
@@ -33,12 +34,13 @@ clamp_mount_nut_height=2.5;
 
 z_tr_sr_distance=30;//distance from z axis threaded rod to smooth rod
 y_tr_sr_distance=40;//distance from y axis threaded rod to smooth rod
- 
+
 // //////////////////////////////
 // OpenSCAD SCRIPT
 // //////////////////////////////
  module mount()
 {
+
 	clamp_mount_hole_dist=max(12,smooth_rod_dia+(rod_clearance*2+clamp_mount_hole_dia));
 
 	block_width=max((bearing_dia+bearing_clearance*2), (clamp_mount_hole_dist+clamp_mount_nut_dia+rod_clearance*2));
@@ -50,6 +52,9 @@ y_tr_sr_distance=40;//distance from y axis threaded rod to smooth rod
 	bearing_indent_height=block_height-bearing_height;
 
 	
+	//rotate([0,90,0])
+
+	{
 	translate([0,0,block_height/2])
 	difference()
 	{
@@ -92,6 +97,7 @@ y_tr_sr_distance=40;//distance from y axis threaded rod to smooth rod
 			}
 		}
 	}
+	}
 }
 
  module bearing_hole(indent_height=5)
@@ -128,7 +134,7 @@ module lower_block(mount_width=20, mount_length=10)
 
 			//nut hole
 			#translate([0,(mount_length+2),hole_center])rotate([90,0,0])
-			cylinder(h = threaded_rod_nut_dia/2, r = threaded_rod_nut_dia/2, center=true);
+			cylinder(h = threaded_rod_nut_dia/2, r = (threaded_rod_nut_dia+2)/2, center=true);
 
 			
 			//roundings

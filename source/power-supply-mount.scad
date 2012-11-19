@@ -18,7 +18,7 @@ include <configuration.scad>
  * @using 1 m3nut
  * @using 2 m3washer
  */
-module endstop(){
+module powersupply_mount(){
 outer_diameter = m8_diameter/2+3.3;
 screw_hole_spacing = 38;
 opening_size = m8_diameter-1.5; //openingsize
@@ -49,5 +49,5 @@ difference(){
 	translate([-(4+screw_hole_spacing)+7, 17-lower_offset, 5]) rotate([90, 0, 0]) cylinder(h =20, r = m3_diameter/2, $fn = 10);
 }
 }
-endstop();
+powersupply_mount();
 
