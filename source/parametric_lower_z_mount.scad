@@ -68,6 +68,8 @@ y_tr_sr_distance=40;//distance from y axis threaded rod to smooth rod
 					translate([4+6,0,0]) cube([block_width-4-6, 8, bearing_height+bearing_indent_height]);
 					cube([4+6, 4, bearing_height+bearing_indent_height]);
 				}
+
+				translate([0,0,-block_height/2]) cylinder(r=29/2,h=block_height);
 		}
 		union()
 		{
@@ -107,7 +109,7 @@ y_tr_sr_distance=40;//distance from y axis threaded rod to smooth rod
 					translate([-12,-24,-7]) cylinder(r=10/2,h=14);
 					translate([-16,-24,-7]) cylinder(r=10/2,h=14);
 				}
-				translate([0,0,-7]) cylinder(r=27/2,h=14);
+				translate([0,0,-7]) cylinder(r=29/2,h=14);
 			}
 		}
 	}
