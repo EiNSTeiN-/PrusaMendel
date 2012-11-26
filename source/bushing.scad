@@ -143,20 +143,20 @@ module linear_holder_base(length, width=10) {
 	}
 }
 
-
+!y_linear_bearings();
 module y_linear_bearings() {
 	translate([0,3,7]) rotate([90,0,0]) difference() {
-		#union() {
-			translate(v=[0,-4,1.5]) cube(size = [26+12,6,3], center = true);
-			translate(v=[0,0,1.5]) cube(size = [26,14,3], center = true);
-			translate(v=[-13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6);
-			translate(v=[13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6); 
+		union() {
+			translate(v=[0,-4,1.5]) cube(size = [26+10.5,6,3], center = true);
+			translate(v=[0,-1,1.5]) cube(size = [26,12,3], center = true);
+			translate(v=[-13,-1,0]) rotate(a=[0,0,30]) cylinder(h = 3, r=6, $fn=6);
+			translate(v=[13,-1,0]) rotate(a=[0,0,30]) cylinder(h = 3, r=6, $fn=6); 
 		}
 
-		translate(v=[-14,0,0]) polyhole(m3_diameter, 10);
-		translate(v=[14,0,0]) polyhole(m3_diameter, 10);
+		translate(v=[-14,-1,0]) polyhole(m3_diameter, 10);
+		translate(v=[14,-1,0]) polyhole(m3_diameter, 10);
 		//hack
-		translate(v=[0,14.25,4.5]) rotate(a=[90,0,0]) translate(v=[0,9.5,0]) rotate(a=[0,0,90]) {
+		*translate(v=[0,14.25,4.5]) rotate(a=[90,0,0]) translate(v=[0,9.5,0]) rotate(a=[0,0,90]) {
 			translate(v=[0,0,lm8uu_length/2+0.5]) ziptie();
 		}
 	}
@@ -180,7 +180,7 @@ module lm8uu_bearing_holder(limits=true) {
 		}
 
 		if(limits) {
-			#translate(v=[-(10-5.5)/2-5.5,0,0.75]) cube(size = [10-5.5,20,1.5], center = true);
+			translate(v=[-(10-5.5)/2-5.5,0,0.75]) cube(size = [10-5.5,20,1.5], center = true);
 			translate(v=[-(10-5.5)/2-5.5,0,lm8uu_length+3.75]) cube(size = [10-5.5,20,1.5], center = true);
 		}
 	}
@@ -217,6 +217,6 @@ module ziptie(){
 	difference() {
 		translate(v=[0,0,0]) cylinder(h = 3.9, r=lm8uu_diameter);
 		translate(v=[0,0,0]) cylinder(h = 5, r=lm8uu_diameter-3, $fn=50);
-		translate(v=[0,0,3]) cylinder(h = 1, r1=lm8uu_diameter-3, r2=lm8uu_diameter, $fn=50);
+		translate(v=[0,0,3]) cylinder(h = 1, r1=lm8uu_diameter-3, r2=lm8uu_diameter-3, $fn=50);
 	}
 }
