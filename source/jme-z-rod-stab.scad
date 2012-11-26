@@ -87,8 +87,11 @@ module bearingSupport() {
   }
 }
 
-union() {
-  origclamp();
-  translate([-(m8_diameter/2 + connector_len),-2.5,0]) cube([connector_len,5,15]);
-  translate([-shaft_separation,0,0]) bearingSupport();
+module z_rod_stab() {
+	union() {
+		origclamp();
+		translate([-(m8_diameter/2 + connector_len),-2.5,0]) cube([connector_len,5,15]);
+		translate([-shaft_separation,0,0]) bearingSupport();
+	}
 }
+z_rod_stab();
