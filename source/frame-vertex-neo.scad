@@ -14,7 +14,7 @@ include <configuration.scad>
 
 basefoot=true;
 
-vfvertex_height=m8_diameter+5;
+vfvertex_height=m8_diameter+(0.66*4*2); // 0.66 is the layer width
 
 vertex(with_foot=basefoot);
 
